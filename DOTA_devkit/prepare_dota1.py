@@ -7,13 +7,12 @@ from multiprocessing import Pool
 from DOTA2COCO import DOTA2COCOTest, DOTA2COCOTrain
 import argparse
 
-wordname_15 = ['plane', 'baseball-diamond', 'bridge', 'ground-track-field', 'small-vehicle', 'large-vehicle', 'ship', 'tennis-court',
-                'basketball-court', 'storage-tank',  'soccer-ball-field', 'roundabout', 'harbor', 'swimming-pool', 'helicopter']
+wordname_5 = ['1', '2', '3', '4', '5']
 
 def parse_args():
     parser = argparse.ArgumentParser(description='prepare dota1')
-    parser.add_argument('--srcpath', default='/home/dingjian/project/dota')
-    parser.add_argument('--dstpath', default=r'/home/dingjian/workfs/dota1-split-1024',
+    parser.add_argument('--srcpath', default='/media/adminer/data/Rocketforce/add_images/')
+    parser.add_argument('--dstpath', default=r'/media/adminer/data/Rocketforce/add_images_mmdet/',
                         help='prepare data')
     args = parser.parse_args()
 
@@ -92,8 +91,8 @@ def prepare(srcpath, dstpath):
                       )
     split_test.splitdata(1)
 
-    DOTA2COCOTrain(os.path.join(dstpath, 'trainval1024'), os.path.join(dstpath, 'trainval1024', 'DOTA_trainval1024.json'), wordname_15, difficult='-1')
-    DOTA2COCOTest(os.path.join(dstpath, 'test1024'), os.path.join(dstpath, 'test1024', 'DOTA_test1024.json'), wordname_15)
+    DOTA2COCOTrain(os.path.join(dstpath, 'trainval1024'), os.path.join(dstpath, 'trainval1024', 'DOTA_trainval1024.json'), wordname_5, difficult='-1')
+    DOTA2COCOTest(os.path.join(dstpath, 'test1024'), os.path.join(dstpath, 'test1024', 'DOTA_test1024.json'), wordname_5)
 
 if __name__ == '__main__':
     args = parse_args()

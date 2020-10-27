@@ -15,10 +15,11 @@ from .RoITransformer import RoITransformer
 from .faster_rcnn_hbb_obb import FasterRCNNHBBOBB
 from .single_stage_rbbox import SingleStageDetectorRbbox
 from .retinanet_obb import RetinaNetRbbox
+from .RoITran_Cascade import RoITran_Cascade
 __all__ = [
     'BaseDetector', 'SingleStageDetector', 'TwoStageDetector', 'RPN',
     'FastRCNN', 'FasterRCNN', 'MaskRCNN', 'CascadeRCNN', 'HybridTaskCascade',
     'RetinaNet', 'FCOS', 'FasterRCNNOBB', 'TwoStageDetectorRbbox',
     'RoITransformer', 'FasterRCNNHBBOBB',
-    'SingleStageDetectorRbbox', 'RetinaNetRbbox'
+    'SingleStageDetectorRbbox', 'RetinaNetRbbox', 'RoITran_Cascade'
 ]

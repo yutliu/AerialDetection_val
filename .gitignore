@@ -111,3 +111,5 @@ data
 .idea
 
 trash/
+work_dirs/
+src/

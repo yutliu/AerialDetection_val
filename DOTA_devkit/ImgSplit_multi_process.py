@@ -48,7 +48,7 @@ class splitbase():
                  subsize=1024,
                  thresh=0.7,
                  choosebestpoint=True,
-                 ext = '.png',
+                 ext = '.tif',
                  padding=True,
                  num_process=8
                  ):
@@ -118,9 +118,9 @@ class splitbase():
         if (self.padding):
             outimg = np.zeros((self.subsize, self.subsize, 3))
             outimg[0:h, 0:w, :] = subimg
-            cv2.imwrite(outdir, outimg)
+            cv2.imwrite(outdir, np.uint8(outimg))
         else:
-            cv2.imwrite(outdir, subimg)
+            cv2.imwrite(outdir, np.uint8(subimg))
 
     def GetPoly4FromPoly5(self, poly):
         distances = [cal_line_length((poly[i * 2], poly[i * 2 + 1] ), (poly[(i + 1) * 2], poly[(i + 1) * 2 + 1])) for i in range(int(len(poly)/2 - 1))]

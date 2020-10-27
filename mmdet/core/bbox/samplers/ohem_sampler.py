@@ -29,14 +29,18 @@ class OHEMSampler(BaseSampler):
             bbox_feats = self.bbox_roi_extractor(
                 feats[:self.bbox_roi_extractor.num_inputs], rois)
             cls_score, _ = self.bbox_head(bbox_feats)
-            loss = self.bbox_head.loss(
+            all_loss = self.bbox_head.loss(
                 cls_score=cls_score,
                 bbox_pred=None,
                 labels=labels,
                 label_weights=cls_score.new_ones(cls_score.size(0)),
                 bbox_targets=None,
                 bbox_weights=None,
-                reduce=False)['loss_cls']
+                reduce=False)
+            if 'loss_cls' in all_loss:
+                loss = all_loss['loss_cls']
+            else:
+                loss = all_loss['rbbox_loss_cls']
             _, topk_loss_inds = loss.topk(num_expected)
         return inds[topk_loss_inds]
 

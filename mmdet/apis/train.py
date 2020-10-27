@@ -14,6 +14,9 @@ from mmdet.datasets import build_dataloader
 from mmdet.models import RPN
 from .env import get_root_logger
 
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+
 
 def parse_losses(losses):
     log_vars = OrderedDict()

@@ -36,9 +36,9 @@ class splitbase():
         if (self.padding):
             outimg = np.zeros((self.subsize, self.subsize, 3))
             outimg[0:h, 0:w, :] = subimg
-            cv2.imwrite(outdir, outimg)
+            cv2.imwrite(outdir, np.uint8(outimg))
         else:
-            cv2.imwrite(outdir, subimg)
+            cv2.imwrite(outdir, np.uint8(subimg))
 
     def SplitSingle(self, name, rate, extent):
         img = cv2.imread(os.path.join(self.srcpath, name + extent))

@@ -59,6 +59,10 @@ def parse_dota_poly_refactor(filename, code):
         #     continue
         if line:
             splitlines = line.strip().split(' ')
+            if 'Rocket' in filename:
+                class_name = splitlines[0]
+                splitlines = splitlines[1:]
+                splitlines.append(class_name)
             object_struct = {}
             ### clear the wrong name after check all the data
             #if (len(splitlines) >= 9) and (splitlines[8] in classname):
@@ -117,6 +121,11 @@ def parse_dota_poly(filename):
         #     continue
         if line:
             splitlines = line.strip().split(' ')
+            if 'Rocket' in filename:
+                if (len(splitlines) == 9):
+                    class_name = splitlines[0]
+                    splitlines = splitlines[1:]
+                    splitlines.append(class_name)
             object_struct = {}
             ### clear the wrong name after check all the data
             #if (len(splitlines) >= 9) and (splitlines[8] in classname):

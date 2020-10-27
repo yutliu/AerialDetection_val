@@ -14,6 +14,9 @@ from mmdet.core import results2json, coco_eval
 from mmdet.datasets import build_dataloader, get_dataset
 from mmdet.models import build_detector
 import time
+import subprocess
+import os
+
 
 def get_time_str():
     return time.strftime('%Y%m%d_%H%M%S', time.localtime())
@@ -202,6 +205,16 @@ def main():
                         result_file = args.out + '.{}.json'.format(name)
                         results2json(dataset, outputs_, result_file)
                         coco_eval(result_file, eval_types, dataset.coco)
+
+    # pythonPath = "/home/liuyuting//anaconda3/envs/MOTS/bin/python"
+    # coderoot_dir = "/home/liuyuting/Code/AerialDetection/"
+    # p = subprocess.run([pythonPath, os.path.join(coderoot_dir, "tools/parse_results.py"),
+    #                     args.config, 'OBB'],
+    #                    stdout=subprocess.PIPE, cwd='./..')
+    # p = subprocess.run([pythonPath, os.path.join(coderoot_dir, "src/result_gene.py"),
+    #                     args.config],
+    #                    stdout=subprocess.PIPE, cwd='./..')
+
 
 
 if __name__ == '__main__':
