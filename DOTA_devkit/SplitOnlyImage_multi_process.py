@@ -29,7 +29,7 @@ class splitbase():
         if not os.path.isdir(self.outpath):
             os.mkdir(self.outpath)
 
-    def saveimagepatches(self, img, subimgname, left, up, ext='.png'):
+    def saveimagepatches(self, img, subimgname, left, up, ext='.tif'):
         subimg = copy.deepcopy(img[up: (up + self.subsize), left: (left + self.subsize)])
         outdir = os.path.join(self.dstpath, subimgname + ext)
         h, w, c = np.shape(subimg)

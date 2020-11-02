@@ -82,13 +82,13 @@ def DOTA2COCOTest(srcpath, destfile, cls_names):
         filenames = util.GetFileFromThisRootDir(imageparent)
         for file in filenames:
             basename = util.custombasename(file)
-            imagepath = os.path.join(imageparent, basename + '.png')
+            imagepath = os.path.join(imageparent, basename + '.tif')
             img = Image.open(imagepath)
             height = img.height
             width = img.width
 
             single_image = {}
-            single_image['file_name'] = basename + '.png'
+            single_image['file_name'] = basename + '.tif'
             single_image['id'] = image_id
             single_image['width'] = width
             single_image['height'] = height
