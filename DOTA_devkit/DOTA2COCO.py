@@ -32,12 +32,12 @@ def DOTA2COCOTrain(srcpath, destfile, cls_names, difficult='2'):
             basename = util.custombasename(file)
             # image_id = int(basename[1:])
 
-            imagepath = os.path.join(imageparent, basename + '.png')
+            imagepath = os.path.join(imageparent, basename + '.tif')
             img = cv2.imread(imagepath)
             height, width, c = img.shape
 
             single_image = {}
-            single_image['file_name'] = basename + '.png'
+            single_image['file_name'] = basename + '.tif'
             single_image['id'] = image_id
             single_image['width'] = width
             single_image['height'] = height

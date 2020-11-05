@@ -20,7 +20,7 @@ import argparse
 
 if __name__ == '__main__':
     # args = parse_args()
-    test_dir = "/media/adminer/data/Rocketforce/SummaryData_mmdet/test1024/images/"
+    test_dir = "/media/adminer/data/Rocketforce/SummaryData_mmdet_add100/test1024_2/images/"
     result_dir = 'work_dirs/cascade_rcnn_RoITrans_x101_fpn_1x_dota/Task1_results_nms'
     save_dir = 'work_dirs/cascade_rcnn_RoITrans_x101_fpn_1x_dota'
     txt_name = '科目四_南信大+华航队.txt'

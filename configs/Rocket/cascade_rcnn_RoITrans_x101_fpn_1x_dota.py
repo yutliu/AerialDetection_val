@@ -276,7 +276,7 @@ test_cfg = dict(
 )
 # dataset settings
 dataset_type = 'RocketDataset'
-data_root = '/media/adminer/data/Rocketforce/SummaryData_mmdet_add100/'
+data_root = '/media/adminer/data/Rocketforce/Little_mmdet/'
 # data_root = '/media/adminer/data/Rocketforce/add_images_mmdet/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
@@ -297,20 +297,20 @@ data = dict(
     val=dict(
         type=dataset_type,
         ann_file=data_root + 'trainval1024/DOTA_trainval1024.json',
-        img_prefix=data_root + 'trainval1024/images',
+        img_prefix=data_root + 'trainval1024/images/',
         img_scale=(1024, 1024),
         img_norm_cfg=img_norm_cfg,
         size_divisor=32,
         flip_ratio=0,
-        with_mask=True,
-        with_crowd=True,
-        with_label=True),
+        with_mask=False,
+        with_label=False,
+        test_mode=True),
     test=dict(
         type=dataset_type,
         ann_file=data_root + 'test1024/DOTA_test1024.json',
         img_prefix=data_root + 'test1024/images',
-        # ann_file=data_root + 'test1024_ms/DOTA_test1024_ms.json',
-        # img_prefix=data_root + 'test1024_ms/images',
+        # ann_file=data_root + 'test1024_2/DOTA_test1024_2.json',
+        # img_prefix=data_root + 'test1024_2/images',
         img_scale=(1024, 1024),
         img_norm_cfg=img_norm_cfg,
         size_divisor=32,

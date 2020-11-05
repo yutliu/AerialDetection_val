@@ -217,7 +217,7 @@ class RoITran_Cascade(BaseDetectorNew, RPNTestMixin):
                 loss_bbox = bbox_head.loss(cls_score, bbox_pred, *bbox_targets)
                 for name, value in loss_bbox.items():
                     if 'loss' in name:
-                        losses['s{}.{}'.format(i, name)] = (value * lw if 'cls' in name else value)
+                        losses['s{}.{}'.format(i, name)] = (value * lw if 'loss' in name else value)
                     else:
                         losses['s{}.{}'.format(i, name)] = (value)
 
@@ -237,7 +237,7 @@ class RoITran_Cascade(BaseDetectorNew, RPNTestMixin):
                 # losses.update(loss_bbox)
                 for name, value in loss_bbox.items():
                     if 'loss' in name:
-                        losses['s{}.{}'.format(i, name)] = (value * lw if 'cls' in name else value)
+                        losses['s{}.{}'.format(i, name)] = (value * lw if 'loss' in name else value)
                     else:
                         losses['s{}.{}'.format(i, name)] = (value)
 
@@ -290,7 +290,7 @@ class RoITran_Cascade(BaseDetectorNew, RPNTestMixin):
                                                                      gt_labels, self.train_cfg.rcnn[-1])
                     loss_rbbox = self.rbbox_head.loss(cls_score, rbbox_pred, *rbbox_targets)
                     for name, value in loss_rbbox.items():
-                        losses['rbbbox_s{}.{}'.format(4, name)] = (value )
+                        losses['s{}.{}'.format(self.num_stages+1, name)] = (value)
 
         return losses
 

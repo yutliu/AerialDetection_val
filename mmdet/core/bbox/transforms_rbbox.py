@@ -946,12 +946,17 @@ def dbbox2result(dbboxes, labels, num_classes):
     # TODO: merge it with bbox2result
     if dbboxes.shape[0] == 0:
         return [
-            np.zeros((0, 9), dtype=np.float32) for i in range(num_classes - 1)
+            np.zeros((1, 9), dtype=np.float32) for i in range(num_classes - 1)
         ]
     else:
         dbboxes = dbboxes.cpu().numpy()
         labels = labels.cpu().numpy()
         return [dbboxes[labels == i, :] for i in range(num_classes - 1)]
+        # result = [dbboxes[labels == i, :] for i in range(num_classes - 1)]
+        # for i, each_class in enumerate(result):
+        #     if each_class.shape[0] == 0:
+        #         result[i] = np.zeros((1, 9))
+        # return result
 
 def distance2bbox(points, distance, max_shape=None):
     """Decode distance prediction to bounding box.

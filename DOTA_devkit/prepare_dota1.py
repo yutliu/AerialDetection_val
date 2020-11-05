@@ -11,8 +11,8 @@ wordname_5 = ['1', '2', '3', '4', '5']
 
 def parse_args():
     parser = argparse.ArgumentParser(description='prepare dota1')
-    parser.add_argument('--srcpath', default='/media/adminer/data/Rocketforce/SummaryData/')
-    parser.add_argument('--dstpath', default=r'/media/adminer/data/Rocketforce/SummaryData_mmdet_add100/',
+    parser.add_argument('--srcpath', default='/media/adminer/data/Rocketforce/Little/')
+    parser.add_argument('--dstpath', default=r'/media/adminer/data/Rocketforce/Little_mmdet/',
                         help='prepare data')
     args = parser.parse_args()
 
@@ -67,35 +67,35 @@ def prepare(srcpath, dstpath):
     if not os.path.exists(os.path.join(dstpath, 'trainval1024')):
         os.mkdir(os.path.join(dstpath, 'trainval1024'))
 
-    # split_train = ImgSplit_multi_process.splitbase(os.path.join(srcpath, 'train'),
-    #                    os.path.join(dstpath, 'trainval1024'),
-    #                   gap=200,
-    #                   subsize=1024,
-    #                   num_process=32,
-    #                   ext='.png'
-    #                   )
-    # split_train.splitdata(1)
-
-    # split_val = ImgSplit_multi_process.splitbase(os.path.join(srcpath, 'val'),
-    #                    os.path.join(dstpath, 'trainval1024'),
-    #                   gap=200,
-    #                   subsize=1024,
-    #                   num_process=32,
-    #                   ext = '.tif'
-    #                   )
-    # split_val.splitdata(1)
-
-    split_test = SplitOnlyImage_multi_process.splitbase(os.path.join(srcpath, 'test2', 'images'),
-                       os.path.join(dstpath, 'test1024_2', 'images'),
+    split_train = ImgSplit_multi_process.splitbase(os.path.join(srcpath, 'train'),
+                       os.path.join(dstpath, 'trainval1024'),
                       gap=200,
                       subsize=1024,
                       num_process=32,
                       ext='.tif'
                       )
-    split_test.splitdata(1)
+    split_train.splitdata(1)
 
-    # DOTA2COCOTrain(os.path.join(dstpath, 'trainval1024'), os.path.join(dstpath, 'trainval1024', 'DOTA_trainval1024.json'), wordname_5, difficult='-1')
-    DOTA2COCOTest(os.path.join(dstpath, 'test1024_2'), os.path.join(dstpath, 'test1024_2', 'DOTA_test1024_2.json'), wordname_5)
+    split_val = ImgSplit_multi_process.splitbase(os.path.join(srcpath, 'val'),
+                       os.path.join(dstpath, 'trainval1024'),
+                      gap=200,
+                      subsize=1024,
+                      num_process=32,
+                      ext='.tif'
+                      )
+    split_val.splitdata(1)
+
+    # split_test = SplitOnlyImage_multi_process.splitbase(os.path.join(srcpath, 'test2', 'images'),
+    #                    os.path.join(dstpath, 'test1024_2', 'images'),
+    #                   gap=200,
+    #                   subsize=1024,
+    #                   num_process=32,
+    #                   ext='.tif'
+    #                   )
+    # split_test.splitdata(1)
+
+    DOTA2COCOTrain(os.path.join(dstpath, 'trainval1024'), os.path.join(dstpath, 'trainval1024', 'DOTA_trainval1024.json'), wordname_5, difficult='-1')
+    # DOTA2COCOTest(os.path.join(dstpath, 'test1024_2'), os.path.join(dstpath, 'test1024_2', 'DOTA_test1024_2.json'), wordname_5)
 
 if __name__ == '__main__':
     args = parse_args()

@@ -34,7 +34,13 @@ def single_gpu_test(model, data_loader, show=False, log_dir=None):
         prog_bar = mmcv.ProgressBar(len(dataset))
     for i, data in enumerate(data_loader):
         with torch.no_grad():
+            if isinstance(model, torch.nn.DataParallel):
+                orgin_device_ids = model.device_ids
+                if len(orgin_device_ids) > 1:
+                    model.device_ids = [0]
             result = model(return_loss=False, rescale=not show, **data)
+            if orgin_device_ids != model.device_ids:
+                model.device_ids = orgin_device_ids
         results.append(result)
 
         if show:

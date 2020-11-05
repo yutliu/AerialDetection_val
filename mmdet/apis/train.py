@@ -13,6 +13,8 @@ from mmdet.core import (DistOptimizerHook, DistEvalmAPHook,
 from mmdet.datasets import build_dataloader
 from mmdet.models import RPN
 from .env import get_root_logger
+from mmdet.datasets import get_dataset
+from mmdet.core.evaluation.eval_hooks_rocket import EvalHook
 
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -192,6 +194,21 @@ def _non_dist_train(model, dataset, cfg, validate=False):
                     cfg.log_level)
     runner.register_training_hooks(cfg.lr_config, cfg.optimizer_config,
                                    cfg.checkpoint_config, cfg.log_config)
+
+    # register eval hooks
+    if validate:
+        # Support batch_size > 1 in validation
+        val_samples_per_gpu = cfg.data.val.pop('samples_per_gpu', 1)
+        val_dataset = get_dataset(cfg.data.val)
+        val_dataloader = build_dataloader(
+            val_dataset,
+            imgs_per_gpu=1,
+            workers_per_gpu=cfg.data.workers_per_gpu,
+            dist=False,
+            shuffle=False)
+        # eval_cfg = cfg.get('evaluation', {})
+        eval_hook = EvalHook
+        runner.register_hook(eval_hook(val_dataloader, **cfg.data.val))
 
     if cfg.resume_from:
         runner.resume(cfg.resume_from)
